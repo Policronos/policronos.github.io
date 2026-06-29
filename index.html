@@ -23,7 +23,7 @@
             max-width: 600px;
         }
 
-        /* Each slider is now contained inside its own isolated block */
+        /* Each slider is contained inside its own isolated block */
         .slider-block {
             background-color: #1a1a1e;
             border-radius: 12px;
@@ -69,16 +69,16 @@
             appearance: none;
             cursor: pointer;
             margin-bottom: 15px;
-            /* Default background before JavaScript updates the dynamic gradient trail */
             background: #334155; 
+            transform: translate3d(0, 0, 0);
         }
 
-        /* WebKit (Chrome, Safari, Edge) Thumb Styling */
+        /* WebKit Thumb Styling */
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: #ffffff;
             box-shadow: 0 2px 6px rgba(0,0,0,0.4);
@@ -86,38 +86,38 @@
         }
 
         input[type="range"]::-webkit-slider-thumb:hover {
-            transform: scale(1.15);
+            transform: scale(1.1);
         }
 
         /* Specific text colors for the centered numbers */
         .slider-red .value-display { color: #ef4444; }
         .slider-blue .value-display { color: #3b82f6; }
-        .slider-yellow .value-display { color: #eab308; }
 
         /* Button Layout and Styling */
         .btn-group {
             display: flex;
             gap: 6px;
             justify-content: center;
+            flex-wrap: wrap; /* Allows buttons to wrap gracefully on smaller mobile screens */
         }
 
         .btn-group button {
             background-color: #27272a;
             color: #e2e8f0;
             border: 1px solid #3f3f46;
-            padding: 6px 12px;
+            padding: 8px 12px;
             font-size: 0.85em;
             font-weight: 600;
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.15s ease;
             min-width: 45px;
+            touch-action: manipulation; 
         }
 
         /* Theme-specific button hover logic */
         .slider-red button:hover { background-color: #ef4444; color: #fff; border-color: #ef4444; }
         .slider-blue button:hover { background-color: #3b82f6; color: #fff; border-color: #3b82f6; }
-        .slider-yellow button:hover { background-color: #eab308; color: #000; border-color: #eab308; }
         
         .btn-group button:active {
             transform: scale(0.95);
@@ -131,84 +131,78 @@
         <div class="slider-block slider-red">
             <div class="slider-header">
                 <label for="slider1">Vida</label>
-                <div class="value-display" id="val1">100</div>
+                <div class="value-display" id="val1">50</div>
             </div>
-            <input type="range" id="slider1" min="0" max="100" value="100" oninput="updateSlider('slider1', 'val1', '#ef4444')">
+            <input type="range" id="slider1" min="0" max="50" value="50" data-color="#ef4444" data-val-id="val1">
             <div class="btn-group">
-                <button onclick="adjustValue('slider1', 'val1', -20, '#ef4444')">-20</button>
-                <button onclick="adjustValue('slider1', 'val1', -10, '#ef4444')">-10</button>
-                <button onclick="adjustValue('slider1', 'val1', -5, '#ef4444')">-5</button>
-                <button onclick="adjustValue('slider1', 'val1', 5, '#ef4444')">+5</button>
-                <button onclick="adjustValue('slider1', 'val1', 10, '#ef4444')">+10</button>
-                <button onclick="adjustValue('slider1', 'val1', 20, '#ef4444')">+20</button>
+                <button onclick="adjustValue('slider1', -20)">-20</button>
+                <button onclick="adjustValue('slider1', -15)">-15</button>
+                <button onclick="adjustValue('slider1', -10)">-10</button>
+                <button onclick="adjustValue('slider1', -5)">-5</button>
+                <button onclick="adjustValue('slider1', 5)">+5</button>
+                <button onclick="adjustValue('slider1', 10)">+10</button>
+                <button onclick="adjustValue('slider1', 15)">+15</button>
+                <button onclick="adjustValue('slider1', 20)">+20</button>
             </div>
         </div>
 
         <div class="slider-block slider-blue">
             <div class="slider-header">
                 <label for="slider2">Stamina</label>
-                <div class="value-display" id="val2">100</div>
+                <div class="value-display" id="val2">50</div>
             </div>
-            <input type="range" id="slider2" min="0" max="100" value="100" oninput="updateSlider('slider2', 'val2', '#3b82f6')">
+            <input type="range" id="slider2" min="0" max="50" value="50" data-color="#3b82f6" data-val-id="val2">
             <div class="btn-group">
-                <button onclick="adjustValue('slider2', 'val2', -20, '#3b82f6')">-20</button>
-                <button onclick="adjustValue('slider2', 'val2', -10, '#3b82f6')">-10</button>
-                <button onclick="adjustValue('slider2', 'val2', -5, '#3b82f6')">-5</button>
-                <button onclick="adjustValue('slider2', 'val2', 5, '#3b82f6')">+5</button>
-                <button onclick="adjustValue('slider2', 'val2', 10, '#3b82f6')">+10</button>
-                <button onclick="adjustValue('slider2', 'val2', 20, '#3b82f6')">+20</button>
-            </div>
-        </div>
-
-        <div class="slider-block slider-yellow">
-            <div class="slider-header">
-                <label for="slider3">Sabedoria</label>
-                <div class="value-display" id="val3">0</div>
-            </div>
-            <input type="range" id="slider3" min="0" max="100" value="0" oninput="updateSlider('slider3', 'val3', '#eab308')">
-            <div class="btn-group">
-                <button onclick="adjustValue('slider3', 'val3', -20, '#eab308')">-20</button>
-                <button onclick="adjustValue('slider3', 'val3', -10, '#eab308')">-10</button>
-                <button onclick="adjustValue('slider3', 'val3', -5, '#eab308')">-5</button>
-                <button onclick="adjustValue('slider3', 'val3', 5, '#eab308')">+5</button>
-                <button onclick="adjustValue('slider3', 'val3', 10, '#eab308')">+10</button>
-                <button onclick="adjustValue('slider3', 'val3', 20, '#eab308')">+20</button>
+                <button onclick="adjustValue('slider2', -20)">-20</button>
+                <button onclick="adjustValue('slider2', -15)">-15</button>
+                <button onclick="adjustValue('slider2', -10)">-10</button>
+                <button onclick="adjustValue('slider2', -5)">-5</button>
+                <button onclick="adjustValue('slider2', 5)">+5</button>
+                <button onclick="adjustValue('slider2', 10)">+10</button>
+                <button onclick="adjustValue('slider2', 15)">+15</button>
+                <button onclick="adjustValue('slider2', 20)">+20</button>
             </div>
         </div>
 
     </div>
 
     <script>
-        // Updates slider value text and paints the colored track trail
-        function updateSlider(sliderId, displayId, color) {
-            const slider = document.getElementById(sliderId);
+        // Updates slider value text and paints the colored track trail based on max limit
+        function updateSlider(slider) {
             const value = slider.value;
+            const max = slider.max || 50;
+            const color = slider.getAttribute('data-color');
+            const displayId = slider.getAttribute('data-val-id');
             
-            // Update the text value
+            const percentage = (value / max) * 100;
+            
             document.getElementById(displayId).textContent = value;
             
-            // Create a dynamic linear-gradient trail that fills up exactly to the slider's current percentage
-            slider.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${value}%, #334155 ${value}%, #334155 100%)`;
+            requestAnimationFrame(() => {
+                slider.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, #334155 ${percentage}%, #334155 100%)`;
+            });
         }
 
-        // Adjusts value when button is clicked and synchronizes the trail update
-        function adjustValue(sliderId, displayId, amount, color) {
+        // Attach event listeners for smooth touch/drag tracking
+        document.querySelectorAll('input[type="range"]').forEach(slider => {
+            ['input', 'change', 'touchmove'].forEach(evt => {
+                slider.addEventListener(evt, () => updateSlider(slider));
+            });
+            updateSlider(slider);
+        });
+
+        // Handles button increments/decrements with bounds tracking (0 to 50)
+        function adjustValue(sliderId, amount) {
             const slider = document.getElementById(sliderId);
+            const max = parseInt(slider.max);
             let newValue = parseInt(slider.value) + amount;
             
-            if (newValue > 100) newValue = 100;
+            if (newValue > max) newValue = max;
             if (newValue < 0) newValue = 0;
             
             slider.value = newValue;
-            updateSlider(sliderId, displayId, color);
+            updateSlider(slider);
         }
-
-        // Initialize trails on page load
-        window.onload = function() {
-            updateSlider('slider1', 'val1', '#ef4444');
-            updateSlider('slider2', 'val2', '#3b82f6');
-            updateSlider('slider3', 'val3', '#eab308');
-        };
     </script>
 
 </body>

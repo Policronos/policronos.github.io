@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Dark Sliders</title>
+    <title>Interactive Colorful Sliders</title>
     <style>
         /* Dark theme setup and centering */
         body {
@@ -17,75 +17,106 @@
             justify-content: center;
             align-items: center;
         }
+
         h2 {
             margin-bottom: 30px;
             color: #ffffff;
             letter-spacing: 0.5px;
         }
-        /* Container for the sliders */
+
+        /* Container made much wider to accommodate the larger sliders */
         .sliders-wrapper {
-            width: 100%;
-            max-width: 320px;
-            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
             background-color: #1a1a1e;
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
+
         .slider-container {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
+
         .slider-container:last-child {
             margin-bottom: 0;
         }
+
         label {
             font-weight: 600;
             display: block;
             margin-bottom: 8px;
             color: #94a3b8;
-            font-size: 0.9em;
+            font-size: 0.95em;
         }
-        /* Dark theme slider styling */
+
+        /* Base slider styling */
         input[type="range"] {
             width: 100%;
-            accent-color: #3b82f6; /* Modern blue accent for the slider handle */
             background: #334155;
-            height: 6px;
+            height: 8px;
             border-radius: 5px;
             cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
         }
+
+        /* Custom Colors using accent-color */
+        .slider-red input[type="range"] {
+            accent-color: #ef4444; /* Vibrant Red */
+        }
+
+        .slider-blue input[type="range"] {
+            accent-color: #3b82f6; /* Original Blue */
+        }
+
+        .slider-yellow input[type="range"] {
+            accent-color: #eab308; /* Vibrant Yellow */
+        }
+
+        /* Dynamic value text colors to match their sliders */
+        .slider-red .value-display { color: #ef4444; }
+        .slider-blue .value-display { color: #3b82f6; }
+        .slider-yellow .value-display { color: #eab308; }
+
         .value-display {
-            color: #3b82f6;
-            font-size: 0.9em;
-            margin-top: 6px;
+            font-size: 1em;
+            margin-top: 8px;
             font-weight: bold;
             text-align: right;
         }
     </style>
 </head>
 <body>
+
     <h2>Interactive Sliders</h2>
+
     <div class="sliders-wrapper">
-        <div class="slider-container">
-            <label for="slider1">Vida</label>
+        <div class="slider-container slider-red">
+            <label for="slider1">Slider A</label>
             <input type="range" id="slider1" min="0" max="100" value="100" oninput="updateValue('slider1', 'val1')">
-            <div class="value-display">Value: <span id="val1">0</span></div>
+            <div class="value-display">Value: <span id="val1">100</span></div>
         </div>
-        <div class="slider-container">
-            <label for="slider2">Stamina</label>
+
+        <div class="slider-container slider-blue">
+            <label for="slider2">Slider B</label>
             <input type="range" id="slider2" min="0" max="100" value="100" oninput="updateValue('slider2', 'val2')">
-            <div class="value-display">Value: <span id="val2">0</span></div>
+            <div class="value-display">Value: <span id="val2">100</span></div>
         </div>
-        <div class="slider-container">
-            <label for="slider3">Sabedoria</label>
+
+        <div class="slider-container slider-yellow">
+            <label for="slider3">Slider C</label>
             <input type="range" id="slider3" min="0" max="100" value="0" oninput="updateValue('slider3', 'val3')">
             <div class="value-display">Value: <span id="val3">0</span></div>
         </div>
     </div>
+
     <script>
         function updateValue(sliderId, displayId) {
             const sliderValue = document.getElementById(sliderId).value;
             document.getElementById(displayId).textContent = sliderValue;
         }
     </script>
+
 </body>
 </html>

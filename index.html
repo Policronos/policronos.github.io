@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Colorful Sliders</title>
+    <title>Interactive Colorful Sliders with Controls</title>
     <style>
         /* Dark theme setup and centering */
         body {
@@ -24,7 +24,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Container made much wider to accommodate the larger sliders */
         .sliders-wrapper {
             width: 90%;
             max-width: 600px;
@@ -35,55 +34,96 @@
         }
 
         .slider-container {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .slider-container:last-child {
             margin-bottom: 0;
         }
 
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
         label {
             font-weight: 600;
-            display: block;
-            margin-bottom: 8px;
             color: #94a3b8;
             font-size: 0.95em;
         }
 
-        /* Base slider styling */
+        .value-display {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        /* Base slider styling across all browsers */
         input[type="range"] {
             width: 100%;
-            background: #334155;
             height: 8px;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 4px;
+            background: #334155;
+            outline: none;
             -webkit-appearance: none;
             appearance: none;
+            cursor: pointer;
+            margin-bottom: 12px;
         }
 
-        /* Custom Colors using accent-color */
-        .slider-red input[type="range"] {
-            accent-color: #ef4444; /* Vibrant Red */
+        /* WebKit (Chrome, Safari, Edge) Thumb Styling */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+            transition: transform 0.1s ease;
         }
 
-        .slider-blue input[type="range"] {
-            accent-color: #3b82f6; /* Original Blue */
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
         }
 
-        .slider-yellow input[type="range"] {
-            accent-color: #eab308; /* Vibrant Yellow */
-        }
+        /* Color Themes using accent-color for modern browsers */
+        .slider-red input[type="range"] { accent-color: #ef4444; }
+        .slider-blue input[type="range"] { accent-color: #3b82f6; }
+        .slider-yellow input[type="range"] { accent-color: #eab308; }
 
-        /* Dynamic value text colors to match their sliders */
         .slider-red .value-display { color: #ef4444; }
         .slider-blue .value-display { color: #3b82f6; }
         .slider-yellow .value-display { color: #eab308; }
 
-        .value-display {
-            font-size: 1em;
-            margin-top: 8px;
-            font-weight: bold;
-            text-align: right;
+        /* Button Layout and Styling */
+        .btn-group {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+        }
+
+        .btn-group button {
+            background-color: #27272a;
+            color: #e2e8f0;
+            border: 1px solid #3f3f46;
+            padding: 6px 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            min-width: 45px;
+        }
+
+        /* Specific hover highlights matching the theme */
+        .slider-red button:hover { background-color: #ef4444; color: #fff; border-color: #ef4444; }
+        .slider-blue button:hover { background-color: #3b82f6; color: #fff; border-color: #3b82f6; }
+        .slider-yellow button:hover { background-color: #eab308; color: #000; border-color: #eab308; }
+        
+        .btn-group button:active {
+            transform: scale(0.95);
         }
     </style>
 </head>
@@ -93,28 +133,72 @@
 
     <div class="sliders-wrapper">
         <div class="slider-container slider-red">
-            <label for="slider1">Slider A</label>
+            <div class="slider-header">
+                <label for="slider1">Slider A</label>
+                <div class="value-display"><span id="val1">100</span></div>
+            </div>
             <input type="range" id="slider1" min="0" max="100" value="100" oninput="updateValue('slider1', 'val1')">
-            <div class="value-display">Value: <span id="val1">100</span></div>
+            <div class="btn-group">
+                <button onclick="adjustValue('slider1', 'val1', -20)">-20</button>
+                <button onclick="adjustValue('slider1', 'val1', -10)">-10</button>
+                <button onclick="adjustValue('slider1', 'val1', -5)">-5</button>
+                <button onclick="adjustValue('slider1', 'val1', 5)">+5</button>
+                <button onclick="adjustValue('slider1', 'val1', 10)">+10</button>
+                <button onclick="adjustValue('slider1', 'val1', 20)">+20</button>
+            </div>
         </div>
 
         <div class="slider-container slider-blue">
-            <label for="slider2">Slider B</label>
+            <div class="slider-header">
+                <label for="slider2">Slider B</label>
+                <div class="value-display"><span id="val2">100</span></div>
+            </div>
             <input type="range" id="slider2" min="0" max="100" value="100" oninput="updateValue('slider2', 'val2')">
-            <div class="value-display">Value: <span id="val2">100</span></div>
+            <div class="btn-group">
+                <button onclick="adjustValue('slider2', 'val2', -20)">-20</button>
+                <button onclick="adjustValue('slider2', 'val2', -10)">-10</button>
+                <button onclick="adjustValue('slider2', 'val2', -5)">-5</button>
+                <button onclick="adjustValue('slider2', 'val2', 5)">+5</button>
+                <button onclick="adjustValue('slider2', 'val2', 10)">+10</button>
+                <button onclick="adjustValue('slider2', 'val2', 20)">+20</button>
+            </div>
         </div>
 
         <div class="slider-container slider-yellow">
-            <label for="slider3">Slider C</label>
+            <div class="slider-header">
+                <label for="slider3">Slider C</label>
+                <div class="value-display"><span id="val3">0</span></div>
+            </div>
             <input type="range" id="slider3" min="0" max="100" value="0" oninput="updateValue('slider3', 'val3')">
-            <div class="value-display">Value: <span id="val3">0</span></div>
+            <div class="btn-group">
+                <button onclick="adjustValue('slider3', 'val3', -20)">-20</button>
+                <button onclick="adjustValue('slider3', 'val3', -10)">-10</button>
+                <button onclick="adjustValue('slider3', 'val3', -5)">-5</button>
+                <button onclick="adjustValue('slider3', 'val3', 5)">+5</button>
+                <button onclick="adjustValue('slider3', 'val3', 10)">+10</button>
+                <button onclick="adjustValue('slider3', 'val3', 20)">+20</button>
+            </div>
         </div>
     </div>
 
     <script>
+        // Updates the text display when dragging the slider directly
         function updateValue(sliderId, displayId) {
-            const sliderValue = document.getElementById(sliderId).value;
-            document.getElementById(displayId).textContent = sliderValue;
+            const slider = document.getElementById(sliderId);
+            document.getElementById(displayId).textContent = slider.value;
+        }
+
+        // Adjusts the slider when clicking the buttons, ensuring boundaries stay between 0 and 100
+        function adjustValue(sliderId, displayId, amount) {
+            const slider = document.getElementById(sliderId);
+            let newValue = parseInt(slider.value) + amount;
+            
+            // Constrain values between 0 and 100
+            if (newValue > 100) newValue = 100;
+            if (newValue < 0) newValue = 0;
+            
+            slider.value = newValue;
+            document.getElementById(displayId).textContent = newValue;
         }
     </script>
 

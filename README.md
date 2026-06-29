@@ -50,4 +50,42 @@
             accent-color: #3b82f6; /* Modern blue accent for the slider handle */
             background: #334155;
             height: 6px;
-            border-
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .value-display {
+            color: #3b82f6;
+            font-size: 0.9em;
+            margin-top: 6px;
+            font-weight: bold;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h2>Interactive Sliders</h2>
+    <div class="sliders-wrapper">
+        <div class="slider-container">
+            <label for="slider1">Slider A</label>
+            <input type="range" id="slider1" min="0" max="100" value="50" oninput="updateValue('slider1', 'val1')">
+            <div class="value-display">Value: <span id="val1">50</span></div>
+        </div>
+        <div class="slider-container">
+            <label for="slider2">Slider B</label>
+            <input type="range" id="slider2" min="0" max="100" value="50" oninput="updateValue('slider2', 'val2')">
+            <div class="value-display">Value: <span id="val2">50</span></div>
+        </div>
+        <div class="slider-container">
+            <label for="slider3">Slider C</label>
+            <input type="range" id="slider3" min="0" max="100" value="50" oninput="updateValue('slider3', 'val3')">
+            <div class="value-display">Value: <span id="val3">50</span></div>
+        </div>
+    </div>
+    <script>
+        function updateValue(sliderId, displayId) {
+            const sliderValue = document.getElementById(sliderId).value;
+            document.getElementById(displayId).textContent = sliderValue;
+        }
+    </script>
+</body>
+</html>

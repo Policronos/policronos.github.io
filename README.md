@@ -17,13 +17,11 @@
             justify-content: center;
             align-items: center;
         }
-
         h2 {
             margin-bottom: 30px;
             color: #ffffff;
             letter-spacing: 0.5px;
         }
-
         /* Container for the sliders */
         .sliders-wrapper {
             width: 100%;
@@ -33,15 +31,12 @@
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
-
         .slider-container {
             margin-bottom: 25px;
         }
-
         .slider-container:last-child {
             margin-bottom: 0;
         }
-
         label {
             font-weight: 600;
             display: block;
@@ -49,7 +44,6 @@
             color: #94a3b8;
             font-size: 0.9em;
         }
-
         /* Dark theme slider styling */
         input[type="range"] {
             width: 100%;
